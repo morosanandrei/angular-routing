@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ChildrenComponent } from './modules/children/children.component';
-import { FirstChildComponent } from './modules/children/components/first-child/first-child.component';
-import { SecondChildComponent } from './modules/children/components/second-child/second-child.component';
-import { DefaultComponent } from './modules/default/default.component';
+import { ChildFirstComponent } from './modules/child/child-first/child-first.component';
+import { ChildComponent } from './modules/child/child/child.component';
 import { RegisterComponent } from './modules/register/register.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: DefaultComponent,
+    redirectTo: 'register',
+    pathMatch: 'full',
   },
   {
     path: 'register',
@@ -18,23 +17,25 @@ const routes: Routes = [
   },
   {
     path: 'children',
-    loadChildren: () => import('./modules/children/children.module').then(m => m.ChildrenModule)
-    // component: ChildrenComponent,
-    // children: [
-    //   {
-    //     path: 'first-parent',
-    //     component: FirstChildComponent,
-    //   },
-    //   {
-    //     path: 'second',
-    //     component: SecondChildComponent,
-    //   },
-    // ],
+    loadChildren: () =>
+      import('./modules/children/children.module').then(
+        (m) => m.ChildrenModule
+      ),
+  },
+  {
+    path: 'child',
+    component: ChildComponent,
+    children: [
+      {
+        path: 'child-first',
+        component: ChildFirstComponent,
+      },
+    ],
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { enableTracing: true })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

@@ -13,6 +13,6 @@ export class ChildrenComponent {
   }
 
   onChild(url: string): void {
-    this.router.navigate([url], { relativeTo: this.route });
+    this.router.navigate([{ outlets: { name: 'children', path: url } }]);
   }
 }

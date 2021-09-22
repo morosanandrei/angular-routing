@@ -11,11 +11,13 @@ const routes: Routes = [
     },
     {
         path: 'first',
-        component: FirstChildComponent
+        component: FirstChildComponent,
+        outlet: 'children',
     },
     {
         path: 'second',
-        component: SecondChildComponent
+        component: SecondChildComponent,
+        outlet: 'children',
     },
 
 ]
